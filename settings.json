@@ -1,0 +1,9 @@
+{
+    "ecl.launchConfiguration": "PlayCluster",
+    "ecl.targetCluster": {
+        "PlayCluster": "roxie"
+    },
+    "cSpell.words": [
+        "Eligiable"
+    ]
+}
