@@ -1,0 +1,280 @@
+IMPORT ch_Workshop;
+
+
+
+//OUTPUT(ch_Workshop.InputRecords.MentorsRaw_DS);
+
+//Record with variables
+Test := RECORD
+    STRING    FullName;
+    STRING    FirstName;
+    STRING    LastName;
+    STRING    Street;
+    STRING    City;
+    STRING    State;
+    STRING    ZipCode;
+    STRING    Region;
+    STRING    Birthday;
+    INTEGER1  Age;
+    STRING    Race_Ethnicity;
+    STRING    ReligionIdentity;
+    STRING    RoleofFaith;
+    STRING    AlcoholUse;
+    STRING    DrugUse;
+    STRING    MarijuanaUse;
+    STRING    CigaretteUse;
+    STRING    VapeUse;
+    STRING    JobRetentionChallenges;
+    STRING    DayOff;
+    STRING    FavoritePlace;
+    STRING    Personality;
+    STRING    SocialStyle;
+    STRING    SadnessResponse;
+    STRING    AngerResponse;
+    STRING    ContinuingEducation; 
+    STRING    SupportsHolidays;
+    STRING    SupportsJob;
+    STRING    SupportsParenting;
+    STRING    SupportsMedical;
+    STRING    SupportsLegal;
+    STRING    SupportsBudgeting;
+    STRING    SupportsMentalHealth;
+    STRING    SupportsResources;
+    STRING    SupportsSocial;
+    STRING    LivingSituation;
+    STRING    CriminalHistoryArrested;
+    STRING    CriminalHistoryJail;
+    STRING    CriminalHistoryCurrentProbation;
+    STRING    ChildrenPregnant;
+    STRING    ChildrenCustody1;
+    STRING    ChildrenCustodyMultiple;
+    STRING    ChildrenKincare1;
+    STRING    ChildrenKincareMultiple;
+    STRING    ChildrenWelfare1;
+    STRING    ChildrenWelfareMultiple;
+    STRING    BioRelationships;
+    STRING    SexualIdentity;
+    STRING    GenderIdentity;
+    REAL4     Latitude;
+    REAl4     Logatitude;
+END;
+
+//basic details
+_FullName                   := '' : STORED('FullName', FORMAT(SEQUENCE(1)));
+_FirstName                  := '' : STORED('FirstName', FORMAT(SEQUENCE(2)));
+_LastName                   := '' : STORED('LastName', FORMAT(SEQUENCE(3)));
+_Street                     := '' : STORED('Street', FORMAT(SEQUENCE(4)));
+_City                       := '' : STORED('City', FORMAT(SEQUENCE(5)));
+_State                      := '' : STORED('State', FORMAT(SEQUENCE(6)));
+_Zipcode                    := '' : STORED('Zipcode', FORMAT(SEQUENCE(7)));
+_Region                     := '' : STORED('Region', FORMAT(SEQUENCE(8)));
+_Birthday                   := '' : STORED('Birthday', FORMAT(SEQUENCE(9)));
+_Age                        := '' : STORED('Age', FORMAT(SEQUENCE(10)));
+_Race_Ethnicity             := '' : STORED('RaceEthnicity', FORMAT(SEQUENCE(11)));
+
+//Religion
+_ReligionIdentity                   := '' : STORED('ReligionIdentity', FORMAT(SEQUENCE(12),  
+                                    SELECT('N/A=N/A,Christianity=Christianity,Islam=Islam,Judaism=Judaism,Hinduism=Hinduism,Buddhism=Buddhism,Spiritual=Spiritual,None=None,Other=Other')));
+_RoleofFaith                := '' : STORED('RoleofFaith', FORMAT(SEQUENCE(13),
+                                    SELECT('NA=NA,Unimportant=Unimportant,Inclusive=Inclusive,Exclusive=Exclusive')));
+
+//Intoxicants 
+_AlcoholUse                 := '' : STORED('AlcholUse', FORMAT(SEQUENCE(14),
+                                    SELECT('N/A=N/A,Occasionally=Occasionally,Responsibly=Responsibly,Irresponsibly=Irresponsibly,Addicted=Addicted,None=None')));
+_DrugUse                    := '' : STORED('DrugUse', FORMAT(SEQUENCE(15),
+                                    SELECT('N/A=N/A,None=None,Occasionally=Occasionally,Regularly=Regularly,Addiced=Addicted')));  
+_MarijuanaUse                  := '' : STORED('MarijuanaUse', FORMAT(SEQUENCE(16),
+                                    SELECT('N/A=N/A,None=None,Occasional=Occasional,Regular=Regular')));
+_CigaretteUse                 := '' : STORED('CigaretteUse', FORMAT(SEQUENCE(17),
+                                    SELECT('N/A=N/A,None=None,Occasional=Occasional,Regular=Regular')));
+_VapeUse                     := '' : STORED('VapeUse', FORMAT(SEQUENCE(18),
+                                    SELECT('N/A=N/A,None=None,Occasional=Occasional,Regular=Regular')));
+
+
+_JobRetentionChallenges     := '' : STORED('JobRetentionChallenge', FORMAT(SEQUENCE(19),
+                                    SELECT('N/A=N/A,Checked=Checked,Unchecked=Unchecked')));
+_DayOff                     := '' : STORED('DayOff', FORMAT(SEQUENCE(20)));
+_FavoritePlace                     := '' : STORED('FavoritePlace', FORMAT(SEQUENCE(21)));
+_Personality                       := '' : STORED('Personality', FORMAT(SEQUENCE(22)));
+_SocialStyle                       := '' : STORED('SocialStyle', FORMAT(SEQUENCE(23),
+                                           SELECT('N/A=N/A,Introverted=Introverted,Extroverted=Extroverted,Both=Both')));
+_SadnessResponse                   := '' : STORED('SadnessResponse', FORMAT(SEQUENCE(24)));
+_AngerResponse                     := '' : STORED('AngerResponse', FORMAT(SEQUENCE(25)));
+_ContinuingEducation               := '' : STORED('ContinuingEducation', FORMAT(SEQUENCE(26),
+                                           SELECT('N/A=N/A,Checked=Checked,Unchecked=Unchecked')));
+
+
+//SUPPPORTS Section
+
+_SupportsHolidays                  := '' : STORED('SupportsHolidays', FORMAT(SEQUENCE(27),
+                                           SELECT('N/A=N/A,Yes=Yes,No=No')));
+_SupportsJob                       := '' : STORED('SupportsJob', FORMAT(SEQUENCE(28),
+                                           SELECT('N/A=N/A,Yes=Yes,No=No')));
+_SupportsParenting                 := '' : STORED('SupportsParenting', FORMAT(SEQUENCE(29),
+                                           SELECT('N/A=N/A,Yes=Yes,No=No')));
+_SupportsMedical                   := '' : STORED('SupportsMedical', FORMAT(SEQUENCE(30),
+                                           SELECT('N/A=N/A,Yes=Yes,No=No')));
+_SupportsLegal                     := '' : STORED('SupportsLegal', FORMAT(SEQUENCE(31),
+                                           SELECT('N/A=N/A,Yes=Yes,No=No')));
+_SupportsBudgeting                 := '' : STORED('SupportsBudgeting', FORMAT(SEQUENCE(32),
+                                           SELECT('N/A=N/A,Yes=Yes,No=No')));
+_SupportsMentalHealth              := '' : STORED('SupportsMentalHealth', FORMAT(SEQUENCE(33),
+                                           SELECT('N/A=N/A,Yes=Yes,No=No')));
+_SupportsResources                 := '' : STORED('SupportsResources', FORMAT(SEQUENCE(34),
+                                           SELECT('N/A=N/A,Yes=Yes,No=No')));
+_SupportsSocial                    := '' : STORED('SupportsSocial', FORMAT(SEQUENCE(35),
+                                           SELECT('N/A=N/A,Yes=Yes,No=No')));
+
+
+_LivingSituation            := '' :        STORED('LivingSituation', FORMAT(SEQUENCE(36)));
+
+
+//Criminal History
+_CriminalHistoryArrested           := '' : STORED('CriminalHistoryArrested', FORMAT(SEQUENCE(37),
+                                           SELECT('N/A=N/A,Yes=Yes,No=No')));
+_CriminalHistoryJail               := '' : STORED('CriminalHistoryJail', FORMAT(SEQUENCE(38),
+                                           SELECT('N/A=N/A,Yes=Yes,No=No')));
+_CriminalHistoryCurrentProbation   := '' : STORED('CriminalHistoryCurrentProbation', FORMAT(SEQUENCE(39),
+                                           SELECT('N/A=N/A,Yes=Yes,No=No')));
+
+//Children
+_ChildrenPregnant                  := '' : STORED('ChildrenPregnant', FORMAT(SEQUENCE(40),
+                                            SELECT('N/A=N/A,Yes=Yes,No=No')));
+_ChildrenCustody1                  := '' : STORED('ChildrenCustody1', FORMAT(SEQUENCE(41),
+                                            SELECT('N/A=N/A,Yes=Yes,No=No')));
+_ChildrenCustodyMultiple           := '' : STORED('ChildrenCustodyMultiple', FORMAT(SEQUENCE(42),
+                                            SELECT('N/A=N/A,Yes=Yes,No=No')));
+_ChildrenKincare1                  := '' : STORED('ChildrenKincare1', FORMAT(SEQUENCE(43),
+                                            SELECT('N/A=N/A,Yes=Yes,No=No')));
+_ChildrenKincareMultiple           := '' : STORED('ChildrenKincareMultiple', FORMAT(SEQUENCE(44),
+                                            SELECT('N/A=N/A,Yes=Yes,No=No')));
+_ChildrenWelfare1                  := '' :  STORED('ChildrenWelfare1', FORMAT(SEQUENCE(45),
+                                            SELECT('N/A=N/A,Yes=Yes,No=No')));
+_ChildrenWelfareMultiple           := '' : STORED('ChildrenWelfareMultiple', FORMAT(SEQUENCE(46),
+                                            SELECT('N/A=N/A,Yes=Yes,No=No')));
+
+
+_BioRelationships           := '' :        STORED('BioRelationships', FORMAT(SEQUENCE(47),
+                                           SELECT(' = ,Important=Important,Difficult=Difficult,None=None,NA=NA')));   
+
+//Sexuality and Gender             
+_SexualIdentity                  := '' :        STORED('SexualIdentity', FORMAT(SEQUENCE(48),
+                                           SELECT(' = ,Heterosexual=Heterosexual,Homosexual=Homosexual,Bisexual=Bisexual,NA=NA')));  
+_GenderIdentity             := '' :        STORED('GenderIdentity', FORMAT(SEQUENCE(49),
+                                           SELECT(' = ,Male=Male,Female=Female,Transgender=Transgender,Non-binary=Non-binary,NA=NA')));  
+
+//Lat and log
+_Latitude                   := '' :        STORED('Latitude', FORMAT(SEQUENCE(50)));
+_Logatitude                 := '' :        STORED('Longitude', FORMAT(SEQUENCE(51)));
+
+
+//data set creation
+SampleDS := DATASET([{_FullName, _FirstName, _LastName, _Street, _City, _State, _ZipCode, _Region, _Birthday, _Age,
+_Race_Ethnicity, _ReligionIdentity, _RoleOfFaith, _AlcoholUse, _DrugUse, _MarijuanaUse, _CigaretteUse, _VapeUse,
+_JobRetentionChallenges, _DayOff, _FavoritePlace, _Personality, _SocialStyle, _SadnessResponse, _AngerResponse, 
+_ContinuingEducation, _SupportsHolidays, _SupportsJob, _SupportsParenting, _SupportsMedical, _SupportsLegal, 
+_SupportsBudgeting, _SupportsMentalHealth,  _SupportsResources, _SupportsSocial,  _LivingSituation, 
+_CriminalHistoryArrested, _CriminalHistoryJail, _CriminalHistoryCurrentProbation, _ChildrenPregnant, 
+_ChildrenCustody1, _ChildrenCustodyMultiple, _ChildrenKincare1, _ChildrenKincareMultiple, _ChildrenWelfare1, 
+_ChildrenWelfareMultiple,  _BioRelationships, _SexualIdentity, _GenderIdentity, _Latitude, _Logatitude}], 
+                     Test); 
+
+OUTPUT(SampleDS, NAMED('Youth'));
+
+Rec := RECORD
+    STRING MentorFullName;
+    String Gender;
+    String Status;
+    String MentorRegion;
+    String Ethnicity;
+    String Occupation;
+    String MaritalStatus;
+    String SpouseFullName;
+    String SpouseGender;
+    String SpouseEthnicity;
+    String SpouseOccupation;
+    String MentorStreet;
+    String MentorCity;
+    String MentorState;
+    INTEGER MentorZipCode;
+    INTEGER Religion;
+    String MentorRoleOfFaith;
+    INTEGER Alcohol;
+    INTEGER Drugs;
+    INTEGER Marijuana;
+    INTEGER Cigarettes;
+    INTEGER Vaping;
+    INTEGER JobRetention;
+    String MentorDayOff;
+    String MentorFavoritePlace;
+    String MentorPersonality;
+    INTEGER Social;
+    String SadnessResponse;
+    String AngerResponse;
+    INTEGER ContinuedEducation;
+    INTEGER Support;
+    String EmergencyHousing;
+    INTEGER CriminalHistory;
+    INTEGER Pregnant;
+    INTEGER ChildrenCustody;
+    INTEGER ChildrenKinCare;
+    INTEGER ChildrenWelfare;
+    INTEGER Bio;
+    INTEGER Sexuality;
+    INTEGER GenderIdentiy;
+    INTEGER totalPoints;
+
+END;
+    
+    _MentorFullName    :='';
+    _Gender     :='';
+    _Status     :='';
+    _MentorRegion     :='';
+    _Ethnicity  :='';
+    _Occupation :='';
+    _MaritalStatus  :='';
+    _SpouseFullName :='';
+    _SpouseGender   :='';
+    _SpouseEthnicity:='';
+    _SpouseOccupation:='';
+    _MentorStreet     :='';
+    _MentorCity       :='';
+    _MentorState      :='';
+    _MentorZipCode    :=0;
+    _Religion   :=0;
+    _MentorRoleOfFaith:='';
+    _Alcohol    :=0;
+    _Drugs    :=0;
+    _Marijuana  :=0;
+    _Cigarettes :=0;
+    _Vaping     :=0;
+    _JobRetention :=0;
+    _MentorDayOff :='';
+    _MentorFavoritePlace:='';
+    _MentorPersonality    :='';
+    _Social    :='';
+    _MentorSadnessResponse    :='';
+    _MentorAngerResponse  :='';
+    _ContinuedEducation:=0;
+    _Support  :=0;
+    _EmergencyHousing:='';
+    _CriminalHistory:=0;
+    _Pregnant:=0;
+    _ChildrenCustody:=0;
+    _ChildrenKinCare:=0;
+    _ChildrenWelfare:=0;
+    _Bio    :=0;
+    _Sexuality  :=0;
+    _GenderIdentiy := 0; 
+    _totalPoints:=0;
+
+    MentorTable := DATASET([{_MentorFullName, _Gender, _Status, _MentorRegion, _Ethnicity, _Occupation, 
+    _MaritalStatus, _SpouseFullName, _SpouseGender, _SpouseEthnicity,
+_SpouseOccupation, _MentorStreet, _MentorCity, _MentorState, _MentorZipCode, _Religion, _MentorRoleOfFaith, _Alcohol,
+_Drugs, _Marijuana, _Cigarettes, _Vaping, _JobRetention, _MentorDayOff, _MentorFavoritePlace, _MentorPersonality, _Social, _MentorSadnessResponse, _MentorAngerResponse, 
+_ContinuedEducation, _Support, _EmergencyHousing, _CriminalHistory, _Pregnant, _ChildrenCustody, 
+_ChildrenKincare, _ChildrenWelfare, _Bio, _Sexuality, _GenderIdentiy, _totalPoints}], 
+                     Rec);
+  
+
+OUTPUT(MentorTable,NAMED('MentorTable'));
